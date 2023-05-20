@@ -1,5 +1,20 @@
 #  - Desenvolvido por Clara -
 
+# Projeto Labook
+
+Projeto de criação de API com funcionadades CRUD integradas a criação de usuário (com autenticação em jwt token), posts e função de like/dislike com rotas protegidas, implementados a biblioteca de dados em SQLite3.
+
+## Como rodar a aplicação
+
+```ubuntu
+$ npm install
+
+$ npm run swagger
+
+$ npm run dev || $ npm run start
+
+```
+
 ### Veja a documentação: 
 [**API Labook**](https://documenter.getpostman.com/view/26000888/2s93m1aPzE)
 <br>
@@ -81,3 +96,7 @@ Para instalar a [**API Labook**](https://documenter.getpostman.com/view/26000888
 - Em seguida, execute o comando npm run start para iniciar o servidor localmente. Ou execute o comando npm run dev para iniciar o servidor da API em modo de desenvolvimento.
 - Agora você pode acessar a API usando o endpoint http://localhost:3000/.
 - Para obter informações mais detalhadas sobre como usar os endpoints, consulte a documentação da [**API Labook**](https://documenter.getpostman.com/view/26000888/2s93m1aPzE).
+
+## e-mail: ferreirabatistaclara@gmail.com
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/clara-ferreira-batista/)
