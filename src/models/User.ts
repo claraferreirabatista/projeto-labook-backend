@@ -1,29 +1,29 @@
 export enum USER_ROLES {
   NORMAL = "NORMAL",
-  ADMIN = "ADMIN"
+  ADMIN = "ADMIN",
 }
 
 export interface UserDB {
-  id: string,
-  name: string,
-  email: string,
-  password: string,
-  role: USER_ROLES,
-  created_at: string,
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  role: USER_ROLES;
+  created_at: string;
 }
 
 export interface UserModel {
-  id: string,
-  name: string,
-  email: string,
-  role: USER_ROLES,
-  createdAt: string
+  id: string;
+  name: string;
+  email: string;
+  role: USER_ROLES;
+  createdAt: string;
 }
 
 export interface TokenPayload {
-  id: string,
-  name: string,
-  role: USER_ROLES
+  id: string;
+  name: string;
+  role: USER_ROLES;
 }
 
 export class User {
@@ -33,10 +33,8 @@ export class User {
     private email: string,
     private password: string,
     private role: USER_ROLES,
-    private createdAt: string,
-  ) { }
-
-  // Getters e setters para as propriedades da classe
+    private createdAt: string
+  ) {}
 
   public get ID(): string {
     return this.id;
@@ -55,11 +53,11 @@ export class User {
   }
 
   public get ROLE(): USER_ROLES {
-    return this.role
+    return this.role;
   }
 
   public get CREATED_AT(): string {
-    return this.createdAt
+    return this.createdAt;
   }
 
   public set NAME(newName: string) {
@@ -78,8 +76,6 @@ export class User {
     this.role = newRole;
   }
 
-  // Métodos para converter entre modelos de banco de dados, modelos de negócio e carga útil do token
-
   public toDBModel(): UserDB {
     return {
       id: this.id,
@@ -87,8 +83,8 @@ export class User {
       email: this.email,
       password: this.password,
       role: this.role,
-      created_at: this.createdAt
-    }
+      created_at: this.createdAt,
+    };
   }
 
   public toBusinessModel(): UserModel {
@@ -97,15 +93,15 @@ export class User {
       name: this.name,
       email: this.email,
       role: this.role,
-      createdAt: this.createdAt
-    }
+      createdAt: this.createdAt,
+    };
   }
 
   public toTokenPayload(): TokenPayload {
     return {
       id: this.id,
       name: this.name,
-      role: this.role
-    }
+      role: this.role,
+    };
   }
 }

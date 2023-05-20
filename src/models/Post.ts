@@ -48,7 +48,7 @@ export class Post {
     private creatorName: string,
   ) { }
 
-  // Getters e setters para as propriedades da classe
+
 
   public get ID(): string {
     return this.id;
@@ -98,7 +98,7 @@ export class Post {
     this.updatedAt = newUpdatedAt;
   }
 
-  // Métodos para adicionar/remover likes e dislikes
+
 
   public addLike(): void {
     this.likes += 1
@@ -116,7 +116,7 @@ export class Post {
     this.dislikes -= 1
   }
 
-  // Métodos para converter entre modelos de banco de dados e modelos de negócio
+
 
   public toDBModel(): PostDB {
     return {

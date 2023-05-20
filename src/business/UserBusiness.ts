@@ -34,16 +34,11 @@ export class UserBusiness {
     private hashManager: HashManager
   ) {}
 
-  /**
-   * Realiza o cadastro de um novo usuário.
-   * @param input - Dados necessários para o cadastro do usuário.
-   * @returns Objeto contendo a mensagem de sucesso e o token de autenticação.
-   * @throws ConflictError se o e-mail já estiver em uso.
-   */
   public signup = async (input: SignupInputDTO): Promise<SignupOutputDTO> => {
     const { name, email, password } = input;
 
-    const userEmailExist: UserDB | undefined = await this.usersDatabase.getUserByEmail(email);
+    const userEmailExist: UserDB | undefined =
+      await this.usersDatabase.getUserByEmail(email);
 
     if (userEmailExist) {
       throw new ConflictError(
@@ -68,7 +63,7 @@ export class UserBusiness {
 
     const tokenPayload: TokenPayload = newUser.toTokenPayload();
     const token = this.tokenManager.createToken(tokenPayload);
-console.log(token);
+    console.log(token);
 
     const output: SignupOutputDTO = {
       message: "Cadastro realizado com sucesso!",
@@ -78,17 +73,12 @@ console.log(token);
     return output;
   };
 
-  /**
-   * Realiza o login do usuário.
-   * @param input - Dados necessários para o login do usuário.
-   * @returns Objeto contendo a mensagem de sucesso e o token de autenticação.
-   * @throws NotFoundError se o e-mail não estiver cadastrado.
-   * @throws BadRequestError se a senha estiver incorreta.
-   */
   public login = async (input: LoginInputDTO): Promise<LoginOutputDTO> => {
     const { email, password } = input;
 
-    const userDB: UserDB | undefined = await this.usersDatabase.getUserByEmail(email);
+    const userDB: UserDB | undefined = await this.usersDatabase.getUserByEmail(
+      email
+    );
 
     if (!userDB) {
       throw new NotFoundError(
@@ -97,7 +87,10 @@ console.log(token);
     }
 
     const hashedPassword: string = userDB.password;
-    const isPasswordCorrect: boolean = await this.hashManager.compare(password, hashedPassword);
+    const isPasswordCorrect: boolean = await this.hashManager.compare(
+      password,
+      hashedPassword
+    );
 
     if (!isPasswordCorrect) {
       throw new BadRequestError(
@@ -116,7 +109,7 @@ console.log(token);
 
     const tokenPayload: TokenPayload = user.toTokenPayload();
     const token = this.tokenManager.createToken(tokenPayload);
-console.log(token);
+    console.log(token);
 
     const output: LoginOutputDTO = {
       message: "Login realizado com sucesso!",
@@ -126,15 +119,9 @@ console.log(token);
     return output;
   };
 
-  /**
-   * Obtém a lista de usuários do sistema.
-   * @param input - Filtros e informações de autenticação.
-   * @returns Lista de usuários.
-   * @throws UnauthorizedError se o token de autenticação for inválido.
-   * @throws ForbiddenError se o usuário não tiver permissão para acessar a lista de usuários.
-   * @throws NotFoundError se não houver usuários cadastrados no banco de dados.
-   */
-  public getUsers = async (input: GetUsersInputDTO): Promise<GetUsersOutputDTO> => {
+  public getUsers = async (
+    input: GetUsersInputDTO
+  ): Promise<GetUsersOutputDTO> => {
     const { query, token } = input;
 
     const payload: TokenPayload | null = this.tokenManager.getPayload(token);
@@ -144,9 +131,7 @@ console.log(token);
     }
 
     if (payload.role !== USER_ROLES.ADMIN) {
-      throw new ForbiddenError(
-        "Somente ADMINS podem acessar esse recurso."
-      );
+      throw new ForbiddenError("Somente ADMINS podem acessar esse recurso.");
     }
 
     const usersDB: UserDB[] = await this.usersDatabase.getUsers(query);
@@ -171,15 +156,6 @@ console.log(token);
     return output;
   };
 
-  /**
-   * Edita os dados de um usuário pelo seu ID.
-   * @param input - Dados necessários para a edição do usuário.
-   * @returns Objeto contendo a mensagem de sucesso.
-   * @throws UnauthorizedError se o token de autenticação for inválido.
-   * @throws ForbiddenError se o usuário não tiver permissão para editar o perfil.
-   * @throws NotFoundError se o usuário não existir no banco de dados.
-   * @throws BadRequestError se nenhum campo for informado para atualização.
-   */
   public editUserById = async (
     input: EditUserByIdInputDTO
   ): Promise<EditUserByIdOutputDTO> => {
@@ -199,7 +175,9 @@ console.log(token);
       }
     }
 
-    const userDB: UserDB | undefined = await this.usersDatabase.getUserById(idToEditUser);
+    const userDB: UserDB | undefined = await this.usersDatabase.getUserById(
+      idToEditUser
+    );
 
     if (!userDB) {
       throw new NotFoundError("Usuário não existe no nosso banco de dados.");
@@ -240,14 +218,6 @@ console.log(token);
     return output;
   };
 
-  /**
-   * Deleta um usuário pelo seu ID.
-   * @param input - Dados necessários para a exclusão do usuário.
-   * @returns Objeto contendo a mensagem de sucesso.
-   * @throws UnauthorizedError se o token de autenticação for inválido.
-   * @throws ForbiddenError se o usuário não tiver permissão para excluir o perfil.
-   * @throws NotFoundError se o usuário não existir no banco de dados.
-   */
   public deleteUserById = async (
     input: DeleteUserByIdInputDTO
   ): Promise<DeleteUserByIdOutputDTO> => {
@@ -267,7 +237,9 @@ console.log(token);
       }
     }
 
-    const userDB: UserDB | undefined = await this.usersDatabase.getUserById(idToDelete);
+    const userDB: UserDB | undefined = await this.usersDatabase.getUserById(
+      idToDelete
+    );
 
     if (!userDB) {
       throw new NotFoundError("Usuário não existe no nosso banco de dados.");

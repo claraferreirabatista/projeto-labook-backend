@@ -29,9 +29,8 @@ import {
 } from "../dto/User/editUserById.dto";
 
 export class UserController {
-  constructor(private userBusiness: UserBusiness) { }
+  constructor(private userBusiness: UserBusiness) {}
 
-  // Método para cadastro de usuário
   public signup = async (req: Request, res: Response): Promise<void> => {
     try {
       const input: SignupInputDTO = SignupSchema.parse({
@@ -55,7 +54,6 @@ export class UserController {
     }
   };
 
-  // Método para login de usuário
   public login = async (req: Request, res: Response): Promise<void> => {
     try {
       const input: LoginInputDTO = LoginSchema.parse({
@@ -78,7 +76,6 @@ export class UserController {
     }
   };
 
-  // Método para obter usuários
   public getUsers = async (req: Request, res: Response): Promise<void> => {
     try {
       const input: GetUsersInputDTO = GetUsersSchema.parse({
@@ -94,14 +91,14 @@ export class UserController {
       if (error instanceof ZodError) {
         res.status(400).send(error.issues);
       } else if (error instanceof BaseError) {
-        res.status(error.statusCode).send(error.message);9
+        res.status(error.statusCode).send(error.message);
+        9;
       } else {
         res.status(500).send("Erro inesperado.");
       }
     }
   };
 
-  // Método para editar usuário por ID
   public editUserById = async (req: Request, res: Response): Promise<void> => {
     try {
       const input: EditUserByIdInputDTO = EditUserByIdSchema.parse({
@@ -128,7 +125,6 @@ export class UserController {
     }
   };
 
-  // Método para deletar usuário por ID
   public deleteUserById = async (
     req: Request,
     res: Response

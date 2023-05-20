@@ -29,14 +29,8 @@ import {
 } from "../dto/Post/likeOrDislikePost.dto";
 
 export class PostController {
-  constructor(private postBusiness: PostBusiness) {}
+  constructor(private postBusiness: PostBusiness) { }
 
-  /**
-   * Cria um novo post.
-   *
-   * @param req - Objeto de requisição do Express.
-   * @param res - Objeto de resposta do Express.
-   */
   public createPost = async (req: Request, res: Response): Promise<void> => {
     try {
       const input: CreatePostInputDTO = CreatePostSchema.parse({
@@ -61,12 +55,6 @@ export class PostController {
     }
   };
 
-  /**
-   * Obtém os posts de acordo com os critérios informados.
-   *
-   * @param req - Objeto de requisição do Express.
-   * @param res - Objeto de resposta do Express.
-   */
   public getPosts = async (req: Request, res: Response): Promise<void> => {
     try {
       const input: GetPostsInputDTO = GetPostsSchema.parse({
@@ -93,12 +81,6 @@ export class PostController {
     }
   };
 
-  /**
-   * Edita um post existente com o ID informado.
-   *
-   * @param req - Objeto de requisição do Express.
-   * @param res - Objeto de resposta do Express.
-   */
   public editPostById = async (req: Request, res: Response): Promise<void> => {
     try {
       const input: EditPostByIdInputDTO = EditPostByIdSchema.parse({
@@ -123,12 +105,6 @@ export class PostController {
     }
   };
 
-  /**
-   * Deleta um post existente com o ID informado.
-   *
-   * @param req - Objeto de requisição do Express.
-   * @param res - Objeto de resposta do Express.
-   */
   public deletePostById = async (
     req: Request,
     res: Response
@@ -155,12 +131,6 @@ export class PostController {
     }
   };
 
-  /**
-   * Realiza a ação de curtir ou descurtir um post com o ID informado.
-   *
-   * @param req - Objeto de requisição do Express.
-   * @param res - Objeto de resposta do Express.
-   */
   public likeOrDislikePost = async (req: Request, res: Response) => {
     try {
       const input = LikeOrDislikePostSchema.parse({
